@@ -79,3 +79,18 @@ export type Movie = {
       "vote_average": number,
       "vote_count": number
     }
+
+    // 출연진 한 명의 정보
+export type Cast = {
+  id: number;
+  name: string;
+  character: string;
+  profile_path: string | null;
+};
+
+// /credits API 전체 응답
+export type CreditResponse = {
+  id: number;
+  cast: Cast[];
+  crew: any[]; // crew는 지금 안 써서 any 처리
+};
