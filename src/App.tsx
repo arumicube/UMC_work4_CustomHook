@@ -4,10 +4,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import HomePage from './pages/home.tsx';
 import NotFound from './pages/not-found.tsx';
-import { NowPlayMovies, PopularMovies, TopRatedMovies, UpcomingMovies } from './pages/movies.tsx';
 import RootLayout from './layout/root-layout.tsx';
 import MovieDetailPage from './pages/movieDetail.tsx';
-
+import { MovieList } from './components/movieList.tsx';
 
 const router = createBrowserRouter([
   {
@@ -20,23 +19,11 @@ const router = createBrowserRouter([
         element: <HomePage />
       },
       {
-        path: 'movies/popular',
-        element: <PopularMovies />
+        path: 'movies/:category',
+        element: <MovieList />,
       },
       {
-        path: 'movies/upcoming',
-        element:<UpcomingMovies/>,
-      },
-      {
-        path: 'movies/top_rated',
-        element:<TopRatedMovies/>,
-      },
-      {
-        path: 'movies/now_playing',
-        element:<NowPlayMovies/>,
-      },
-      {
-        path: 'movies/:movieId',
+        path: 'movie/:movieId',
         element: <MovieDetailPage/>,
       },
       

@@ -4,18 +4,15 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useFetch } from '../hook/useFetch';
 import { MovieResponse } from '../types/movie';
 import { CustomButton } from './custom-button';
+import { useParams } from 'react-router-dom';
 
-interface MovieListProps {
-  title: string;
-  endpoint: string;
-}
-
-export const MovieList = ({ title, endpoint }: MovieListProps) => {
+export const MovieList = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
+  const { category } = useParams<{ category: string }>();
 
   const { data, isLoading, error } = useFetch<MovieResponse>(
-    `https://api.themoviedb.org/3/movie/${endpoint}?language=ko-KR&page=${page}`
+  `https://api.themoviedb.org/3/movie/${category}?api_key=${import.meta.env.VITE_TMDB_API_KEY}&language=ko-KR&page=${page}`
   );
 
   if (error?.trim()) {
@@ -50,7 +47,7 @@ export const MovieList = ({ title, endpoint }: MovieListProps) => {
         <CustomButton onClick={() => setPage((prev) => prev + 1)} label=">" />
       </div>
 
-      <h1 className="text-3xl font-bold text-center my-8 text-gray-900">{title}</h1>
+      <h1 className="text-3xl font-bold text-center my-8 text-gray-900">{category}</h1>
 
       <ul className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-6">
         {data.results.map((movie) => (
